@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Data Analizer
 
-First, run the development server:
+## Descripción
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Data Analizer es una aplicación desarrollada en React y Next.js que permite analizar datos de diversas fuentes. Utiliza Tailwind CSS para el diseño y ESLint para el análisis de código.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Características
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Análisis de datos**: Herramientas para cargar y visualizar datos.
+- **Interfaz amigable**: Diseño moderno y responsivo con Tailwind CSS.
+- **Configuración personalizable**: Variables de entorno y configuración detallada.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Instalación
 
-## Learn More
+### Prerrequisitos
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (versión 14 o superior)
+- npm o yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Pasos para la instalación
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Clona el repositorio:
 
-## Deploy on Vercel
+    git clone <URL_DEL_REPOSITORIO>
+    cd Data_Analizer
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Instala las dependencias:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    npm install
+
+#### Configura las variables de entorno:
+
+Crea un archivo .env en la raíz del proyecto y añade las variables necesarias. Puedes usar .env.example como plantilla.
+
+## Uso
+Para iniciar la aplicación en modo de desarrollo:
+
+    npm run dev
+    
+o con yarn:
+
+    yarn dev
+
+La aplicación estará disponible en http://localhost:3000.
+
+## Scripts disponibles
+- dev: Inicia la aplicación en modo desarrollo.
+- build: Compila la aplicación para producción.
+- start: Inicia la aplicación en modo producción.
+- lint: Ejecuta ESLint para analizar el código.
+
+## Estructura del proyecto
+
+    ├── public             # Archivos estáticos
+    ├── src                # Código fuente
+    │   ├── components     # Componentes React
+    │   ├── pages          # Páginas Next.js
+    │   ├── styles         # Estilos CSS
+    │   └── utils          # Utilidades y funciones auxiliares
+    ├── .env               # Variables de entorno
+    ├── package.json       # Dependencias y scripts
+    ├── tailwind.config.ts # Configuración de Tailwind CSS
+    └── tsconfig.json      # Configuración de TypeScript
+
+# Contribuir
+Las contribuciones son bienvenidas. Por favor, sigue los pasos a continuación para contribuir:
+
+- Haz un fork del repositorio.
+- Crea una nueva rama (git checkout -b feature/nueva-feature).
+- Realiza tus cambios y haz commit (git commit -am 'Añadir nueva feature').
+- Sube tu rama (git push origin feature/nueva-feature).
+- Abre un Pull Request.
+
+# Contacto
+Para cualquier duda o consulta, puedes contactarme a través de miguelnr152@gmail.com.
+
