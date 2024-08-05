@@ -4,6 +4,7 @@ import "./ResultsPreview.css";
 // Componentes
 import Row from "./Row";
 import EditPanel from "./EditPanel";
+import ElementoCabecera from "./ElementoCabecera";
 
 interface Props {
   csv: Record<string, any>[];
@@ -21,20 +22,33 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
 
   useEffect(() => {
     if (csv && csv.length > 0) {
-      const updatedCsv = csv.map((fila, index) => {
-        const { ...rest } = fila;
-        return {
-          id: String(index),
-          ...rest,
-        };
-      });
-      setCsvData(updatedCsv);
-      setNumFilas(updatedCsv.length);
-      setNumColumnas(Object.keys(updatedCsv[0]).length);
-      setCabeceras(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]);
+
+      if (!csv[0].hasOwnProperty("id")) {
+        const updatedCsv = csv.map((fila, index) => {
+          const { ...rest } = fila;
+          return {
+            id: String(index),
+            ...rest,
+          };
+        });
+        setCsvData(updatedCsv);
+        setNumFilas(updatedCsv.length);
+        setNumColumnas(Object.keys(updatedCsv[0]).length);
+        setCabeceras(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]);
+      } else {
+        setCsvData(csv);
+        setNumFilas(csv.length);
+        setNumColumnas(Object.keys(csv[0]).length);
+        setCabeceras(Object.keys(csv[0]));
+      }
+
     }
   }, [csv]);
 
+  /**
+   * Elimina un elemento del CSV
+   * @param event 
+   */
   const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     const key = event.currentTarget.getAttribute("data-key");
     if (ENV_DEVELOPMENT) console.log("Key: ", key);
@@ -50,9 +64,9 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
    */
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     const key = event.currentTarget.getAttribute("data-key");
-    if (ENV_DEVELOPMENT) console.log("Key: ", key);
 
-    console.log("CSV Data: ", csvData);
+    if (ENV_DEVELOPMENT) console.log("Key: ", key);
+    if (ENV_DEVELOPMENT) console.log("CSV Data: ", csvData);
 
     const data = csvData.find((element) => element["id"] === key) || null;
     if (ENV_DEVELOPMENT) console.log("Data: ", data);
@@ -69,9 +83,9 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
     setModalData(null);
   }
 
-    /** 
-     * Actualiza la fila y oculta el modal
-    */
+  /** 
+   * Actualiza la fila y oculta el modal
+  */
   const handleUpdateRow = (event: React.MouseEvent<HTMLButtonElement>) => {
     const inputs = document.querySelectorAll("input");
     const newData = { ...modalData };
@@ -93,6 +107,22 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
     handleHideModal();
   };
 
+
+  const handleOrderBy = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const key = event.currentTarget.getAttribute("data-key");
+    if (ENV_DEVELOPMENT) console.log("Key: ", key);
+  
+    if (!key) return;
+  
+    const newData = [...csvData].sort((a, b) => {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    });
+  
+    setCsvData(newData);
+  };
+
   return (
     <>
       {showModal ? (
@@ -104,9 +134,7 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
               <div key="cabecera" className="row_table flex">
                 <div key="cabecera_opciones" className="cell_table">Opciones</div>
                 {cabeceras.map((cabecera, colIndex) => (
-                  <div key={colIndex} className="cell_table">
-                    {cabecera}
-                  </div>
+                  <ElementoCabecera key={cabecera} cabecera={cabecera} colIndex={colIndex} handleOrderBy={handleOrderBy}/> 
                 ))}
               </div>
 
