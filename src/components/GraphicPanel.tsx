@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 // Componentes
 import Button from './Button';
 import Select from './Select';
+import Graphic from './Graphic';
 
 type Graphic = {
     id: number;
@@ -120,7 +121,7 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
         <>
             {showedGraphic ? (
                 <>
-                    <div className="w-full bg-gray-400 flex flex-col justify-center gap-10 p-10">
+                    <div className="w-full flex flex-col justify-center gap-10 p-10">
                         
                         
                         <h2 className="text-center font-extrabold text-3xl underline">{showedGraphic.title}</h2>    
@@ -139,7 +140,12 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
                             <label htmlFor="y" className="font-bold">Y Axis:</label>
                             <Select options={axisOptions} defaultOption={showedGraphic.y} name="y" onChange={handleSelect} />
                         </div>
-                        <Button text="Volver" onClick={() => setShowedGraphic(null)} />
+                        <div className="flex justify-center">
+                            <Button text="Volver" onClick={() => setShowedGraphic(null)} />
+                        </div>
+
+                        {/* Aqui se muestra el grafico */}
+                        <Graphic />
                     </div>
                 </>
             ) : (
