@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({ type = 'primary', text = null, icono = 
     return (
         <button type="button" className={`btn btn-${type} flex gap-2`} onClick={onClick} data-key={datakey}>
             {icono && <i className={`bi ${icono}`}></i>}
-            {text && <span>{text}</span>}
+            {text && <span className="w-full text-center">{text}</span>}
         </button>
     )
 }

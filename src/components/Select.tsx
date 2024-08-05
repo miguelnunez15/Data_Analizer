@@ -21,7 +21,9 @@ const Select: React.FC<SelectProps> = ({ name, defaultOption, onChange, options 
             name={name} 
             onChange={handleChange} 
             className="border border-gray-300 rounded-md p-1 text-black"
-        >
+        >   
+            <option key="" value="" className="text-black">Indiferente</option>
+
             {options.map((option) => (
                 <option key={option.trim()} value={option.trim()} className="text-black">
                     {option.trim()}

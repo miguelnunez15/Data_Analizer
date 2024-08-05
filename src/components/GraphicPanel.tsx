@@ -120,16 +120,23 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
         <>
             {showedGraphic ? (
                 <>
-                    <div>
-                        <h2>{showedGraphic.title}</h2>
-                        <p>{showedGraphic.type}</p>
-                        {/* Input x e y */}
-                        <div>
-                            <label htmlFor="x">X</label>
+                    <div className="w-full bg-gray-400 flex flex-col justify-center gap-10 p-10">
+                        
+                        
+                        <h2 className="text-center font-extrabold text-3xl underline">{showedGraphic.title}</h2>    
+
+                        <div className="w-full flex justify-center gap-3">
+                            <label className="font-bold">Graphic Type:</label>
+                            <p className="text-center">{showedGraphic.type}</p>
+                        </div>
+                        
+                        <div className="w-full flex justify-center gap-3">
+                            <label htmlFor="x" className="font-bold">X Axis:</label>
                             <Select options={axisOptions} defaultOption={showedGraphic.x} name="x" onChange={handleSelect} />
                         </div>
-                        <div>
-                            <label htmlFor="y">Y</label>
+
+                        <div className="w-full flex justify-center gap-3">
+                            <label htmlFor="y" className="font-bold">Y Axis:</label>
                             <Select options={axisOptions} defaultOption={showedGraphic.y} name="y" onChange={handleSelect} />
                         </div>
                         <Button text="Volver" onClick={() => setShowedGraphic(null)} />
@@ -137,18 +144,27 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
                 </>
             ) : (
                 <>
-                    <div className='flex flex-row gap-3'>
+                    <div className='flex flex-row gap-3 w-full'>
                         <Button type="secondary" text="Volver" onClick={goBack} />
                         <Button type="success" text="Nuevo Gráfico" onClick={handleCrearNuevoGrafico} />    
                         <Button type="danger" text="Eliminar Todos" onClick={handleEliminarTodos} />    
                     </div>
                     <div className='flex flex-row flex-wrap gap-10'>
                         {graphics.map((grafico, index) => (
-                            <div key={index} className="border-white border-2 p-3">
-                                <h3>{grafico.title}</h3>
-                                <p>{grafico.type}</p>
-                                <Button datakey={grafico.id} onClick={handleShowGraphic} text="Ver Gráfico"/>
-                                <Button datakey={grafico.id} onClick={handleEliminarGrafico} text="Eliminar"/>
+                            <div key={index} className="border-white border-2 p-3 rounded flex flex-col gap-3 w-60">
+                                <h2 className="text-center font-extrabold underline text-xl">{grafico.title}</h2>
+                                <div className="flex gap-1">
+                                    <span className='font-bold'>X Axis:</span>
+                                    <span>{grafico.x}</span>
+                                </div>
+                                <div className="flex gap-1">
+                                    <span className='font-bold'>Y Axis:</span>
+                                    <span>{grafico.y}</span>
+                                </div>
+                                <div className="flex flex-col gap-2 justify-center">
+                                    <Button datakey={grafico.id} type="success" onClick={handleShowGraphic} text="Ver Gráfico"/>
+                                    <Button datakey={grafico.id} type="danger" onClick={handleEliminarGrafico} text="Eliminar"/>
+                                </div>                            
                             </div>
                         ))}
                     </div>
