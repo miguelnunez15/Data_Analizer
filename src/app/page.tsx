@@ -7,6 +7,7 @@ import ResultsPreview from "@/components/ResultsPreview";
 // ? Útiles
 import { parseCSV } from "@/lib/csvUtils";
 import { useState } from "react";
+import { saveToLocalStorage } from "@/lib/localStorage";
 
 export default function Home() {
 
@@ -24,6 +25,8 @@ export default function Home() {
         const result: any[] = await parseCSV(file);
         setData(result);
         if (NEXT_PUBLIC_ENV_DEVELOPMENT) console.log("Data: ", result);
+        saveToLocalStorage('graphics', []);
+        saveToLocalStorage('headers', []);
 
       } catch (error) {
         console.error("Error parsing CSV file: ", error);

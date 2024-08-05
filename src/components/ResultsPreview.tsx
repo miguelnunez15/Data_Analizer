@@ -4,6 +4,7 @@ import "./ResultsPreview.css";
 // Componentes
 import Row from "./Row";
 import EditPanel from "./EditPanel";
+import GraphicPanel from "./GraphicPanel";
 import ElementoCabecera from "./ElementoCabecera";
 import Button from "./Button";
 
@@ -17,8 +18,12 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
   const [numFilas, setNumFilas] = useState(0);
   const [numColumnas, setNumColumnas] = useState(0);
   const [csvData, setCsvData] = useState<Record<string, any>[]>([]);
-  const [showModal, setShowModal] = useState(false);
+
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [modalData, setModalData] = useState<Record<string, any> | null>(null);
+
+  const [showModalGraphic, setShowModalGraphic] = useState(false);
+
 
   const ENV_DEVELOPMENT = process.env.NEXT_PUBLIC_ENV_DEVELOPMENT;
 
@@ -37,11 +42,13 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
         setNumFilas(updatedCsv.length);
         setNumColumnas(Object.keys(updatedCsv[0]).length);
         setCabeceras(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]);
+        localStorage.setItem("headers", JSON.stringify(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]))        
       } else {
         setCsvData(csv);
         setNumFilas(csv.length);
         setNumColumnas(Object.keys(csv[0]).length);
         setCabeceras(Object.keys(csv[0]));
+        localStorage.setItem("headers", JSON.stringify(Object.keys(csv[0])))
       }
 
     }
@@ -74,14 +81,14 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
     if (ENV_DEVELOPMENT) console.log("Data: ", data);
 
     setModalData(data);
-    setShowModal(true);
+    setShowModalEdit(true);
   };
 
   /**
    * Oculta el modal de edición de una fila
    */
   const handleHideModal = () => {
-    setShowModal(false);
+    setShowModalEdit(false);
     setModalData(null);
   }
 
@@ -148,19 +155,29 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
   }
 
 
+  const handleShowModalGraphic = () => { setShowModalGraphic(true);  }
+
+  const handleHideModalGraphic = () => { setShowModalGraphic(false);  }
+
+
+
+
   return (
     <div className="w-full flex flex-col gap-10 p-5 pt-10">
       <div className="flex justify-center gap-3">
         <Button type="primary" text="Descargar CSV" onClick={downloadCSV}/> 
-        <Button type="primary" text="Nuevo CSV" onClick={newCSV}/> 
+        <Button type="primary" text="Nuevo CSV" onClick={newCSV}/>
+        <Button type="secondary" text="Explorar Gráficas" onClick={handleShowModalGraphic}/>
       </div>
 
-      {showModal ? (
+      {showModalEdit ? (
         <EditPanel 
           data={modalData} 
           goBack={handleHideModal} 
           saveChanges={handleUpdateRow} 
         />
+      ) : showModalGraphic ? (
+        <GraphicPanel goBack={handleHideModalGraphic}/>
       ) : (
         <>
           {csvData.length > 0 ? (
