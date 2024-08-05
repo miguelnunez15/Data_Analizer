@@ -8,6 +8,7 @@ import './page.css';
 // ? Componentes
 import FileInput from "@/components/FileInput";
 import ResultsPreview from "@/components/ResultsPreview";
+import Button from "@/components/Button";
 
 // ? Útiles
 import { parseCSV } from "@/lib/csvUtils";
@@ -37,9 +38,8 @@ export default function Home() {
     }
   };
 
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">      
+    <main className="flex flex-col items-center justify-between">      
 
       {data.length > 0 ? (
         <>

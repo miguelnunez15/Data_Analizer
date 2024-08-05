@@ -5,6 +5,7 @@ import "./ResultsPreview.css";
 import Row from "./Row";
 import EditPanel from "./EditPanel";
 import ElementoCabecera from "./ElementoCabecera";
+import Button from "./Button";
 
 interface Props {
   csv: Record<string, any>[];
@@ -108,6 +109,11 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
   };
 
 
+  /**
+   * Ordena el CSV por la cabecera seleccionada
+   * @param event 
+   * @returns 
+   */
   const handleOrderBy = (event: React.MouseEvent<HTMLButtonElement>) => {
     const key = event.currentTarget.getAttribute("data-key");
     if (ENV_DEVELOPMENT) console.log("Key: ", key);
@@ -123,10 +129,35 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
     setCsvData(newData);
   };
 
+
+  /**
+   * Descarga el CSV final
+   */
+  const downloadCSV = () => {
+    const csv = csvData.map((fila) => {
+      return Object.values(fila).join(",");
+    }).join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.csv";
+    a.click();
+  }
+
   return (
-    <>
+    <div className="w-full flex flex-col gap-10 p-5 pt-10">
+      <div className="flex justify-center">
+        <Button type="primary" text="Descargar CSV" onClick={downloadCSV}/> 
+      </div>
+
       {showModal ? (
-        <EditPanel data={modalData} goBack={handleHideModal} saveChanges={handleUpdateRow} />
+        <EditPanel 
+          data={modalData} 
+          goBack={handleHideModal} 
+          saveChanges={handleUpdateRow} 
+        />
       ) : (
         <>
           {csvData.length > 0 ? (
@@ -134,7 +165,12 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
               <div key="cabecera" className="row_table flex">
                 <div key="cabecera_opciones" className="cell_table">Opciones</div>
                 {cabeceras.map((cabecera, colIndex) => (
-                  <ElementoCabecera key={cabecera} cabecera={cabecera} colIndex={colIndex} handleOrderBy={handleOrderBy}/> 
+                  <ElementoCabecera 
+                    key={cabecera} 
+                    cabecera={cabecera} 
+                    colIndex={colIndex} 
+                    handleOrderBy={handleOrderBy}
+                  /> 
                 ))}
               </div>
 
@@ -154,7 +190,7 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 
