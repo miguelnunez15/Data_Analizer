@@ -189,7 +189,7 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
               ))}
             </div>
           ) : (
-            <div>No se ha podido parsear el CSV</div>
+            <div>Cargando...</div>
           )}
         </>
       )}
