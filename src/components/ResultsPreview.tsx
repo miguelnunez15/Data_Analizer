@@ -9,9 +9,10 @@ import Button from "./Button";
 
 interface Props {
   csv: Record<string, any>[];
+  newCSV: () => void;
 }
 
-const ResultsPreview: React.FC<Props> = ({ csv }) => {
+const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
   const [cabeceras, setCabeceras] = useState<string[]>([]);
   const [numFilas, setNumFilas] = useState(0);
   const [numColumnas, setNumColumnas] = useState(0);
@@ -146,10 +147,12 @@ const ResultsPreview: React.FC<Props> = ({ csv }) => {
     a.click();
   }
 
+
   return (
     <div className="w-full flex flex-col gap-10 p-5 pt-10">
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-3">
         <Button type="primary" text="Descargar CSV" onClick={downloadCSV}/> 
+        <Button type="primary" text="Nuevo CSV" onClick={newCSV}/> 
       </div>
 
       {showModal ? (

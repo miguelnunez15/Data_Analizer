@@ -1,0 +1,31 @@
+
+.file-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .custom-file-upload {
+    display: inline-block;
+    padding: 12px 24px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom-file-upload i {
+    margin-right: 8px;
+  }
+  
+  .file-input {
+    display: none;
+  }

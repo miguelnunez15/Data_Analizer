@@ -1,14 +1,8 @@
 'use client';
 
-import Image from "next/image";
-
-// ? CSS
-import './page.css';
-
 // ? Componentes
 import FileInput from "@/components/FileInput";
 import ResultsPreview from "@/components/ResultsPreview";
-import Button from "@/components/Button";
 
 // ? Útiles
 import { parseCSV } from "@/lib/csvUtils";
@@ -38,12 +32,16 @@ export default function Home() {
     }
   };
 
+  const newCSV = () => {
+    setData([]);
+  }
+
   return (
     <main className="flex flex-col items-center justify-between">      
 
       {data.length > 0 ? (
         <>
-          <ResultsPreview csv={ data }/>
+          <ResultsPreview csv={ data } newCSV={ newCSV } />
         </>
       ) : (
         <FileInput onChange={handleFileChange} />
