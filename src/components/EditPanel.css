@@ -1,0 +1,43 @@
+/* Estilo para el contenedor principal del panel de edición */
+.edit-panel {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color:black;
+  }
+  
+  /* Estilo para las filas flexibles */
+  .edit-panel .flex-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilo para los labels */
+  .edit-panel .flex-row span {
+    font-weight: bold;
+    width: 150px;
+  }
+  
+  /* Estilo para los inputs */
+  .edit-panel .flex-row input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo para los botones */
+  .edit-panel .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  

@@ -3,7 +3,7 @@ import React from 'react';
 
 export function parseCSV(file : File): Promise<Record<string, any>[]> {
 
-    const ENV_DEVELOPMENT = process.env.ENV_DEVELOPMENT;
+    const NEXT_PUBLIC_ENV_DEVELOPMENT = process.env.NEXT_PUBLIC_ENV_DEVELOPMENT;
 
     return new Promise((resolve, reject) => {
 
@@ -14,7 +14,7 @@ export function parseCSV(file : File): Promise<Record<string, any>[]> {
             return;
           }
           const text = event.target.result as string;
-          if (ENV_DEVELOPMENT) console.log(text);
+          if (NEXT_PUBLIC_ENV_DEVELOPMENT) console.log(text);
     
           Papa.parse(text, {
             header: true,

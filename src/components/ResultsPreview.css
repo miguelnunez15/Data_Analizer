@@ -1,17 +1,17 @@
 
-.row {
+.row_table {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
-.cell {
+.cell_table {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1rem;
     border: 1px solid white;
     width: 100%;
+    height: 50px;
 }
