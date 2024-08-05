@@ -94,6 +94,7 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
         console.log("Grafico Mostrado: ", grafico);
         if (grafico) {
             setShowedGraphic(grafico);
+            console.log("Showeed Graphic: ", showedGraphic);
         }
     }
 

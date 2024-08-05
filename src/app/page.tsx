@@ -27,6 +27,7 @@ export default function Home() {
         if (NEXT_PUBLIC_ENV_DEVELOPMENT) console.log("Data: ", result);
         saveToLocalStorage('graphics', []);
         saveToLocalStorage('headers', []);
+        saveToLocalStorage('data', []);
 
       } catch (error) {
         console.error("Error parsing CSV file: ", error);

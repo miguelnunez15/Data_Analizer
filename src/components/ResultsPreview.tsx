@@ -43,12 +43,14 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
         setNumColumnas(Object.keys(updatedCsv[0]).length);
         setCabeceras(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]);
         localStorage.setItem("headers", JSON.stringify(["id", ...Object.keys(updatedCsv[0]).filter((key) => key !== "id")]))        
+        localStorage.setItem("data", JSON.stringify(updatedCsv));
       } else {
         setCsvData(csv);
         setNumFilas(csv.length);
         setNumColumnas(Object.keys(csv[0]).length);
         setCabeceras(Object.keys(csv[0]));
         localStorage.setItem("headers", JSON.stringify(Object.keys(csv[0])))
+        localStorage.setItem("data", JSON.stringify(csv));
       }
 
     }
@@ -65,6 +67,7 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
     const newData = csvData.filter((element) => element["id"] !== key);
     console.log("New data: ", newData);
     setCsvData(newData);
+    localStorage.setItem("data", JSON.stringify(newData));
   };
 
   /**
@@ -82,6 +85,7 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
 
     setModalData(data);
     setShowModalEdit(true);
+    localStorage.setItem("data", JSON.stringify(data));
   };
 
   /**
@@ -114,6 +118,7 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
 
     setCsvData(updatedData);
     handleHideModal();
+    localStorage.setItem("data", JSON.stringify(updatedData));
   };
 
 
