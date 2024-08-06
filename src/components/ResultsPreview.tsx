@@ -105,6 +105,7 @@ const ResultsPreview: React.FC<Props> = ({ csv, newCSV }) => {
 
     inputs.forEach((input) => {
       const key = input.getAttribute("name");
+      if (!key) return;
       const value = input.value;
       newData[key] = value;
     });
