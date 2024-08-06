@@ -7,6 +7,15 @@ import Select from "./Select";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+type Graphic = {
+    id: number;
+    title: string;
+    type: string;
+    x: string;
+    y: string;
+    data: any[];
+};
+
 interface SelectProps {
     name: string;
     defaultOption: string;
@@ -15,20 +24,20 @@ interface SelectProps {
 }
 
 
-const Graphic: React.FC = () => {
+interface GraphicProps {
+    idGraphic: number | string;
+    showedGraphic: Graphic;
+}
+
+const Graphic: React.FC<GraphicProps> = ({ idGraphic, showedGraphic }) => {
     const [data, setData] = useState<Array<{ [key: string]: any }>>([]);
     const [columns, setColumns] = useState<string[]>([]);
     const [xColumn, setXColumn] = useState<string>("");
     const [yColumn, setYColumn] = useState<string>("");
 
     useEffect(() => {
-        // Simula la carga de datos desde un archivo CSV o una API
         const fetchData = async () => {
-            const fetchedData = [
-                { "Columna 1": 1, "Columna 2": 10 },
-                { "Columna 1": 2, "Columna 2": 20 },
-                { "Columna 1": 3, "Columna 2": 30 },
-            ];
+            const fetchedData = JSON.parse(localStorage.getItem("data") || "[]");
             setData(fetchedData);
             setColumns(Object.keys(fetchedData[0]));
         };
@@ -57,13 +66,13 @@ const Graphic: React.FC = () => {
             <div className="flex flex-row gap-3 mb-4">
                 <Select
                     name="xColumn"
-                    defaultOption=""
+                    defaultOption={showedGraphic.x}
                     onChange={handleXColumnChange}
                     options={columns}
                 />
                 <Select
                     name="yColumn"
-                    defaultOption=""
+                    defaultOption={showedGraphic.y}
                     onChange={handleYColumnChange}
                     options={columns}
                 />

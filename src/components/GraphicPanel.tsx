@@ -145,8 +145,7 @@ const GraphicPanel: React.FC<Props> = ({ goBack }) => {
                             <Button text="Volver" onClick={() => setShowedGraphic(null)} />
                         </div>
 
-                        {/* Aqui se muestra el grafico */}
-                        <Graphic />
+                        <Graphic idGraphic="1" showedGraphic={showedGraphic}/>
                     </div>
                 </>
             ) : (
